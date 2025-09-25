@@ -1,0 +1,1 @@
+docker exec -it flask_container /bin/sh 
