@@ -163,3 +163,8 @@ cython_debug/
 
 #  vscode
 .vscode
+
+#  python
+__pycache__
+venv
+*.db

@@ -1,1 +1,1 @@
-docker run --name flask_container -p 9000:8000 flask_app 
+docker run --name flask_container -e DB_PASSWORD=mysecretpassword -p 9000:8000 flask_app 

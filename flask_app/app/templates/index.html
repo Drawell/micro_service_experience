@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="mb-4">My Check List</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Create task</h5>
+                <form method="POST" action="{{ url_for('add_task') }}">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="title" placeholder="Task Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="description" placeholder="Description (optionaly)" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create task</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="tasks">
+            <h5 class="card-title">Current tasks</h5>
+            {% for task in tasks %}
+            <div class="card task-card mb-3 {% if task.completed %}border-success{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title {% if task.complete_date %}completed{% endif %}">
+                                {{ task.title }}
+                            </h5>
+                            {% if task.description %}
+                            <p class="card-text {% if task.complete_date %}completed{% endif %}">
+                                {{ task.description }}
+                            </p>
+                            {% endif %}
+                            <div class="task-meta text-muted small">
+                                <span>Created at: {{ task.create_date.strftime('%d.%m.%Y %H:%M') }}</span>
+                            </div>
+                            {% if task.complete_date %}
+                            <div class="task-meta text-muted small">
+                                <span>Completed at: {{ task.complete_date.strftime('%d.%m.%Y %H:%M') }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="btn-group ms-3">
+                            <a href="{{ url_for('complete_task', task_id=task.id) }}" 
+                               class="btn btn-sm {% if task.completed %}btn-warning{% else %}btn-success{% endif %}">
+                                {% if task.complete_date %}Return{% else %}Complete{% endif %}
+                            </a>
+                            <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a href="{{ url_for('delete_task', task_id=task.id) }}" 
+                               class="btn btn-sm btn-outline-danger" 
+                               onclick="return confirm('Are you sure?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center text-muted py-5">
+                <h4>There is no tasks</h4>
+                <p>Create your firs one</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
