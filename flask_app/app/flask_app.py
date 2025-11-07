@@ -7,9 +7,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SECRET_KEY'] = os.getenv("DB_PASSWORD", "debug_secret")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
+basedir = os.path.abspath(os.path.dirname(__file__))
+default_db_uri = 'sqlite:///' + os.path.join(basedir, 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URI", default_db_uri)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)

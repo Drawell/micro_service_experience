@@ -4,10 +4,10 @@ EXPOSE 8000
 WORKDIR /opt/flask_app
 COPY app /opt/flask_app
 COPY requirements.txt /opt/flask_app/requirements.txt
+COPY run_flask_server.sh /opt/flask_app/run_flask_server.sh 
 
 RUN pip3 install -r requirements.txt
-RUN flask --app flask_app db init
-RUN flask --app flask_app db migrate -m "Initial migration"
-RUN flask --app flask_app db upgrade
+RUN chmod 755 /opt/flask_app/run_flask_server.sh
 
-ENTRYPOINT [ "python3", "-m", "flask", "--app", "flask_app.py", "run", "--host=0.0.0.0", "--port=8000"]
+ARG DB_URI
+ENTRYPOINT ["./run_flask_server.sh"]
