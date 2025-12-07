@@ -1,8 +1,8 @@
-PG_CONTAINER="pg_server"
+PG_CONTAINER="pg_server_01"
 PG_PASSWORD="mysecretpassword"
 DB_URI="postgresql://postgres:$PG_PASSWORD@$PG_CONTAINER:5432/postgres"
-FLASK_CONTAINER="flask_server"
-NET_NAME="myNet_01"
+FLASK_CONTAINER="flask_server_01"
+NET_NAME="my_net_01"
 
 echo "cleaning up..."
 flask_and_pg/clean_up.sh
