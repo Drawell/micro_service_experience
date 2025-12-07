@@ -9,5 +9,4 @@ COPY run_flask_server.sh /opt/flask_app/run_flask_server.sh
 RUN pip3 install -r requirements.txt
 RUN chmod 755 /opt/flask_app/run_flask_server.sh
 
-ARG DB_URI
 ENTRYPOINT ["./run_flask_server.sh"]

@@ -14,7 +14,7 @@ echo "start pg server..."
 docker run -d --name $PG_CONTAINER --net $NET_NAME --ip 192.168.10.2 -p 5432:5432 -e POSTGRES_PASSWORD=$PG_PASSWORD --volume pg_flask_data:/var/lib/postgresql postgres
 
 echo "building flask app..."
-flask_app/build_flask_app.sh $DB_URI
+flask_app/build_flask_app.sh
 
 echo "start flask app..."
 docker run -d --name $FLASK_CONTAINER -p 9000:8000 -e DB_PASSWORD=$PG_PASSWORD -e DB_URI=$DB_URI flask_app
