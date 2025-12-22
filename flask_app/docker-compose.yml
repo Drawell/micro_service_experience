@@ -1,0 +1,14 @@
+services:
+  flask-server: 
+    image: flask_app
+    container_name: flask_container
+    environment:
+      - DB_PASSWORD=mysecretpassword
+    ports:
+      - 9000:8000
+    networks:
+      - internet
+networks:
+  internet:
+    driver: bridge
+    name: internet

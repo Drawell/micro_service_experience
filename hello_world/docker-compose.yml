@@ -1,0 +1,6 @@
+services:
+  hello_world:
+    image: hello_world
+    container_name: hello_container
+    environment:
+      - USER_NAME=compose

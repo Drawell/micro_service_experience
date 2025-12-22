@@ -1,0 +1,18 @@
+services:
+  psql_server:
+    image: postgres
+    container_name: psql_server
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword 
+    ports:
+      - 5432:5432 
+    networks:
+      - internet
+    volumes:
+      - postgres_data:/var/lib/postgresql
+volumes:
+  postgres_data:
+networks:
+  internet:
+    driver: bridge
+    name: internet
