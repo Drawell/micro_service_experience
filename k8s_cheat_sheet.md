@@ -38,6 +38,7 @@ kubectl run kuber-app-1 --image=flask_app --port=8000 --image-pull-policy=Never
 ### show pods
 ```bash
 kubectl get pods
+kubectl get pods --watch
 ```
 
 ### describe pod

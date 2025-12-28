@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: flask-rs-app
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kuber
+          - flask_task_list
+      - key: db_type
+        operator: Exists
+  template:
+    metadata:
+      labels:
+        app: flask_task_list
+        db_type: sqlite
+    spec:
+      containers:
+        - name: flask-container
+          image: flask_app
+          ports:
+          - containerPort: 8000
+          imagePullPolicy: Never
