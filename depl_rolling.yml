@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rolling-depl
+  labels:
+    app: flask_task_list
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: flask_task_list
+  template:
+    metadata:
+      labels:
+        app: flask_task_list
+    spec:
+      containers:
+        - name: flask-container
+          image: flask_app
+          ports:
+          - containerPort: 8000
+          imagePullPolicy: Never

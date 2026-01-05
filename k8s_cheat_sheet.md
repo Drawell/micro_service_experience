@@ -125,3 +125,39 @@ kubectl create namespace new-some-space
 ```bash
 kubectl delete namespace new-some-space
 ```
+
+
+## Deployment
+
+### show deployments
+```bash
+kubectl get deployment
+kubectl get deployment some-dep -o yaml
+```
+
+### create deployment
+```bash
+kubectl create deployment some-dep --image=flask_app --port=8000 --replicas=3 --image-pull-policy=Never
+kubectl apply -f deployment.yml --record
+```
+
+### change revision
+```bash
+kubectl set image deployment/some-dep flask-app-vlggb=hello_world --record
+```
+
+### show revision history
+```bash
+kubectl rollout history deployment some-dep
+```
+
+### rollback revision
+```bash
+kubectl rollout undo deployment some-dep
+kubectl rollout undo deployment some-dep --to-revision=1
+```
+
+### delete deployment
+```bash
+kubectl delete deployment some-dep -n default
+```
