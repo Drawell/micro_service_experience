@@ -24,5 +24,6 @@ spec:
         - name: flask-container
           image: flask_app
           ports:
-          - containerPort: 8000
+          - name: default-port
+            containerPort: 8000
           imagePullPolicy: Never

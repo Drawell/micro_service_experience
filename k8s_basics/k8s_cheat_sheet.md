@@ -161,3 +161,21 @@ kubectl rollout undo deployment some-dep --to-revision=1
 ```bash
 kubectl delete deployment some-dep -n default
 ```
+
+
+## Services
+
+### show services
+```bash
+kubectl get svc
+```
+
+### show pods endpoints for services
+```bash
+kubectl get endpoints
+```
+
+### delete service
+```bash
+kubectl delete service some-service
+```

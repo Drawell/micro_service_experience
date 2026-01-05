@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: some-service
+  name: cluster-ip-service
 spec:
   selector:
     app: flask_task_list
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8000
-  type: NodePort
+      targetPort: default-port
+  type: ClusterIP  # Only inside cluster
