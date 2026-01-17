@@ -179,3 +179,10 @@ kubectl get endpoints
 ```bash
 kubectl delete service some-service
 ```
+
+## Events
+
+### show k8s events
+```bash
+kubectl get events --watch
+```

@@ -72,5 +72,13 @@ def delete_task(task_id):
     flash('Task deleted!', 'warning')
     return redirect(url_for('index'))
 
+@app.route('/health')
+def health():
+    return 'OK'
+
+@app.route('/unhealth')
+def unhealth():
+    return "Error", 500
+
 if __name__ == '__main__':
     app.run(debug=True)
