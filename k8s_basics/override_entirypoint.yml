@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-storage-depl
+  labels:
+    app: file-storage-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-storage-app
+  template:
+    metadata:
+      labels:
+        app: file-storage-app
+    spec:
+      containers:
+        - name: storage-writter
+          image: file_storage
+          imagePullPolicy: Never
+          command: ["python3", "file_storage.py", "kuber_file.txt", "-w", "-c", "hello kuber!", "-p", "60"]
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /opt/file_storage/storage/kuber_file.txt
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            failureThreshold: 3
+          volumeMounts:
+            - name: file-storage-vol
+              mountPath: /opt/file_storage/storage
+        - name: storage-reader
+          image: file_storage
+          imagePullPolicy: Never
+          args: [kuber_file.txt, "-r", "-p", "180"]
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /opt/file_storage/storage/kuber_file.txt
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 5
+          volumeMounts:
+            - name: file-storage-vol
+              mountPath: /opt/file_storage/storage
+      volumes:
+        - name: file-storage-vol

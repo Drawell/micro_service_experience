@@ -186,3 +186,8 @@ kubectl delete service some-service
 ```bash
 kubectl get events --watch
 ```
+
+### remove k8s events
+```bash
+kubectl delete events --all
+```

@@ -1,0 +1,13 @@
+services:
+  file_storage:
+    image: file_storage
+    container_name: file_storage_container 
+    volumes:
+      - file_storage_data:/opt/file_storage/storage
+    entrypoint: ["python3", "file_storage.py", "file.txt", "-w", "-c", "hello world!"]
+    # entrypoint: ["python3", "file_storage.py", "file.txt", "-r"]
+    # command: ["new_file.txt", "-w", "-c", "There is new file."]
+    # command: ["new_file.txt", "-r"]
+
+volumes:
+  file_storage_data:
