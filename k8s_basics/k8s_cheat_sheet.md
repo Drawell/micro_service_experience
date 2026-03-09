@@ -180,6 +180,18 @@ kubectl get endpoints
 kubectl delete service some-service
 ```
 
+## Jobs
+
+### show jobs
+```bash
+kubectl get jobs
+```
+
+### delete job
+```bash
+kubectl delete job job-name
+```
+
 ## Events
 
 ### show k8s events

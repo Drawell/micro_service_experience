@@ -5,7 +5,7 @@ from time import sleep
 STORAGE_NAME = "storage"
 
 def write(filename, payload):
-    with open(path.join(STORAGE_NAME, filename), 'w') as f:
+    with open(path.join(STORAGE_NAME, filename), 'a') as f:
         f.writelines(payload)
 
 

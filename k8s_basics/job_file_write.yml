@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: file-write-job
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      containers:
+        - name: storage-writter
+          image: file_storage
+          imagePullPolicy: Never
+          args: [counter.txt, "-w", "-c", "1", "-p", "30"]
+          volumeMounts:
+            - name: file-storage-vol
+              mountPath: /opt/file_storage/storage
+      restartPolicy: Never
+      volumes:
+        - name: file-storage-vol
