@@ -6,7 +6,7 @@ STORAGE_NAME = "storage"
 
 def write(filename, payload):
     with open(path.join(STORAGE_NAME, filename), 'a') as f:
-        f.writelines(payload)
+        f.writelines(payload + '\n')
 
 
 def read(filename):
@@ -18,6 +18,7 @@ def read(filename):
 
 
 def main():
+    print("File-storage started")
     parser = argparse.ArgumentParser(prog='File Storage',
                                      description='Store some information in files')
     parser.add_argument('filename')
@@ -36,7 +37,6 @@ def main():
 
     if args.pause:
         sleep(args.pause)
-
 
 
 

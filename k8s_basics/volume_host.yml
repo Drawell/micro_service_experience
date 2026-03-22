@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volume-host-depl
+  labels:
+    app: volume-host-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volume-host-app
+  template:
+    metadata:
+      labels:
+        app: volume-host-app
+    spec:
+      containers:
+        - name: storage-writter
+          image: file_storage
+          imagePullPolicy: Never
+          args: [kuber_file.txt, "-w", "-c", "hello host!", "-p", "30"]
+          volumeMounts:
+            - name: host-vol
+              mountPath: /opt/file_storage/storage
+      volumes:
+        - name: host-vol
+          hostPath: 
+            path: /mnt/data
+            type: DirectoryOrCreate

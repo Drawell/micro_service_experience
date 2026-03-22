@@ -47,5 +47,7 @@ spec:
           volumeMounts:
             - name: file-storage-vol
               mountPath: /opt/file_storage/storage
+              readOnly: true
       volumes:
         - name: file-storage-vol
+          emptyDir: {}
